@@ -1,3 +1,7 @@
 [submodule "cunit"]
 	path = cunit
 	url = https://gitlab.com/cunity/cunit.git
+[submodule "googletest"]
+	path = googletest
+	url = https://github.com/google/googletest.git
+	branch = master
