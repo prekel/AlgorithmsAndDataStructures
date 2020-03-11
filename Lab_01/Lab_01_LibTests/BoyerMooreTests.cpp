@@ -21,3 +21,22 @@ TEST(BoyerMooreTests, BoyerMooreTest2)
 
     delete bm;
 }
+
+TEST(BoyerMooreTests, PreBmBcTest1)
+{
+    int sigma = 256;
+    auto m = 2;
+    auto bm = new BoyerMoore("123123", "23", sigma);
+
+    bm->PreBmBc();
+
+    auto bmbc = bm->GetBmBc();
+
+    ASSERT_EQ(bmbc->size(), sigma);
+    for (int i = 0; i < sigma; i++)
+    {
+        ASSERT_EQ(bmbc->at(i), m);
+    }
+
+    delete bm;
+}

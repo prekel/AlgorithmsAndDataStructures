@@ -15,16 +15,36 @@ private:
     std::vector<int>* bmGs;
     std::vector<int>* answer;
 
-    void PreBmBc();
-    bool IsPrefix(int p);
-    int SuffixLength(int p);
-    void PreBmGs();
-    void BM();
-
 public:
     BoyerMoore(std::string y, std::string x, int sigma);
+
+    void PreBmBc();
+
+    bool IsPrefix(int p);
+
+    int SuffixLength(int p);
+
+    void PreBmGs();
+
+    void BM();
+
     void Calculate();
-    std::vector<int>* GetAnswer();
+
+    std::vector<int>* GetBmBc()
+    {
+        return bmBc;
+    }
+
+    std::vector<int>* GetBmGs()
+    {
+        return bmGs;
+    }
+
+    std::vector<int>* GetAnswer()
+    {
+        return answer;
+    }
+
     ~BoyerMoore();
 };
 

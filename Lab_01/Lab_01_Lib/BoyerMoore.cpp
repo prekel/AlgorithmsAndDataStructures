@@ -6,10 +6,6 @@ void BoyerMoore::PreBmBc()
 {
     auto m = x->length();
     bmBc->assign(sigma, m);
-//    for (auto i = 0; i < sigma; i++)
-//    {
-//        bmBc->at(i) = m;
-//    }
 }
 
 bool BoyerMoore::IsPrefix(int p)
@@ -109,11 +105,6 @@ BoyerMoore::BoyerMoore(std::string y, std::string x, int sigma)
 void BoyerMoore::Calculate()
 {
     BM();
-}
-
-std::vector<int>* BoyerMoore::GetAnswer()
-{
-    return answer;
 }
 
 BoyerMoore::~BoyerMoore()
