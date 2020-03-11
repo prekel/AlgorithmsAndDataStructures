@@ -4,12 +4,12 @@
 
 void BoyerMoore::PreBmBc()
 {
-    bmBc->resize(sigma);
     auto m = x->length();
-    for (auto i = 0; i < sigma; i++)
-    {
-        bmBc->at(i) = m;
-    }
+    bmBc->assign(sigma, m);
+//    for (auto i = 0; i < sigma; i++)
+//    {
+//        bmBc->at(i) = m;
+//    }
 }
 
 bool BoyerMoore::IsPrefix(int p)
@@ -45,6 +45,7 @@ void BoyerMoore::PreBmGs()
 {
     auto lastPrefixPosition = x->length();
     auto m = x->length();
+    bmGs->assign(m, 0);
     for (int i = (int)x->length() - 1; i >= 0; i--)
     {
         if (IsPrefix(i + 1))
@@ -92,4 +93,32 @@ void BoyerMoore::BM()
     {
         answer->push_back(-1);
     }
+}
+
+BoyerMoore::BoyerMoore(std::string y, std::string x, int sigma)
+{
+    this->y = &y;
+    this->x = &x;
+    this->sigma = sigma;
+
+    bmBc = new std::vector<int>();
+    bmGs = new std::vector<int>();
+    answer = new std::vector<int>();
+}
+
+void BoyerMoore::Calculate()
+{
+    BM();
+}
+
+std::vector<int>* BoyerMoore::GetAnswer()
+{
+    return answer;
+}
+
+BoyerMoore::~BoyerMoore()
+{
+    delete bmBc;
+    delete bmGs;
+    delete answer;
 }

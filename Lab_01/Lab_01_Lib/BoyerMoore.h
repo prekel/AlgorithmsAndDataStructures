@@ -22,9 +22,10 @@ private:
     void BM();
 
 public:
-    BoyerMoore(std::string y, std::string x);
+    BoyerMoore(std::string y, std::string x, int sigma);
     void Calculate();
+    std::vector<int>* GetAnswer();
+    ~BoyerMoore();
 };
-
 
 #endif //BOYERMOORE_H
