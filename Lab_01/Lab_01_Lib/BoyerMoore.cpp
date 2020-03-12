@@ -100,10 +100,20 @@ void BoyerMoore::BM()
     }
 }
 
-BoyerMoore::BoyerMoore(std::string y, std::string x)
+BoyerMoore::BoyerMoore(std::string y, std::string x, bool insensitive)
 {
     this->y = std::move(y);
     this->x = std::move(x);
+
+    if (insensitive)
+    {
+        std::transform(this->y.begin(), this->y.end(), this->y.begin(),
+                       [](auto c)
+                       { return std::tolower(c); });
+        std::transform(this->x.begin(), this->x.end(), this->x.begin(),
+                       [](auto c)
+                       { return std::tolower(c); });
+    }
 
     borderArray = new std::vector<int>();
     shiftArray = new std::vector<int>();

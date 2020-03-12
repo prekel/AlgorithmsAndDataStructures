@@ -15,12 +15,16 @@ private:
     std::vector<int>* answer;
 
     void FullSuffixMatch();
+
     void PartialSuffixMatch();
+
     void BM();
+
 public:
-    BoyerMoore(std::string y, std::string x);
+    BoyerMoore(std::string y, std::string x, bool insensitive);
 
     void Calculate();
+
     std::vector<int>* GetAnswer()
     {
         return answer;

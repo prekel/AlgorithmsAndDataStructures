@@ -8,7 +8,7 @@ using namespace testing;
 
 TEST(BoyerMooreTests, BoyerMooreTest1)
 {
-    auto bm = new BoyerMoore("rgsgfdsq125rerdsgs", "r");
+    auto bm = new BoyerMoore("rgsgfdsq125rerdsgs", "r", false);
     bm->Calculate();
     auto answer = bm->GetAnswer();
 
@@ -22,7 +22,7 @@ TEST(BoyerMooreTests, BoyerMooreTest1)
 
 TEST(BoyerMooreTests, BoyerMooreTest2)
 {
-    auto bm = new BoyerMoore("123123", "23");
+    auto bm = new BoyerMoore("123123", "23", false);
     bm->Calculate();
     auto answer = bm->GetAnswer();
 
@@ -35,7 +35,7 @@ TEST(BoyerMooreTests, BoyerMooreTest2)
 
 TEST(BoyerMooreTests, BoyerMooreTest3)
 {
-    auto bm = new BoyerMoore("ABAAABCDBBABCDDEBCABC", "ABC");
+    auto bm = new BoyerMoore("ABAAABCDBBABCDDEBCABC", "ABC", false);
     bm->Calculate();
     auto answer = bm->GetAnswer();
 
@@ -49,7 +49,7 @@ TEST(BoyerMooreTests, BoyerMooreTest3)
 
 TEST(BoyerMooreTests, BoyerMooreTest4)
 {
-    auto bm = new BoyerMoore("GCATCGCAGAGAGTATACAGTACG", "GCAGAGAG");
+    auto bm = new BoyerMoore("GCATCGCAGAGAGTATACAGTACG", "GCAGAGAG", false);
     bm->Calculate();
     auto answer = bm->GetAnswer();
 
@@ -57,4 +57,14 @@ TEST(BoyerMooreTests, BoyerMooreTest4)
     EXPECT_EQ(answer->at(0), 5);
 
     delete bm;
+}
+
+TEST(BoyerMooreTests, BoyerMooreTest5)
+{
+    auto bm = BoyerMoore("GCATCGCAGAGAGTATACAGTACG", "GcagAGAG", true);
+    bm.Calculate();
+    auto answer = bm.GetAnswer();
+
+    ASSERT_EQ(answer->size(), 1);
+    EXPECT_EQ(answer->at(0), 5);
 }
