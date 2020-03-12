@@ -8,12 +8,21 @@ using namespace testing;
 
 TEST(BoyerMooreTests, BoyerMooreTest1)
 {
-    EXPECT_LT(1, 2);
+    auto bm = new BoyerMoore("rgsgfdsq125rerdsgs", "r");
+    bm->Calculate();
+    auto answer = bm->GetAnswer();
+
+    ASSERT_EQ(answer->size(), 3);
+    EXPECT_EQ(answer->at(0), 0);
+    EXPECT_EQ(answer->at(1), 11);
+    EXPECT_EQ(answer->at(2), 13);
+
+    delete bm;
 }
 
 TEST(BoyerMooreTests, BoyerMooreTest2)
 {
-    auto bm = new BoyerMoore("123123", "23", 256);
+    auto bm = new BoyerMoore("123123", "23");
     bm->Calculate();
     auto answer = bm->GetAnswer();
 
@@ -26,7 +35,7 @@ TEST(BoyerMooreTests, BoyerMooreTest2)
 
 TEST(BoyerMooreTests, BoyerMooreTest3)
 {
-    auto bm = new BoyerMoore("ABAAABCDBBABCDDEBCABC", "ABC", 256);
+    auto bm = new BoyerMoore("ABAAABCDBBABCDDEBCABC", "ABC");
     bm->Calculate();
     auto answer = bm->GetAnswer();
 
@@ -40,7 +49,7 @@ TEST(BoyerMooreTests, BoyerMooreTest3)
 
 TEST(BoyerMooreTests, BoyerMooreTest4)
 {
-    auto bm = new BoyerMoore("GCATCGCAGAGAGTATACAGTACG", "GCAGAGAG", 256);
+    auto bm = new BoyerMoore("GCATCGCAGAGAGTATACAGTACG", "GCAGAGAG");
     bm->Calculate();
     auto answer = bm->GetAnswer();
 

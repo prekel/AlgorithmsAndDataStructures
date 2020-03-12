@@ -7,7 +7,6 @@
 class BoyerMoore
 {
 private:
-    int sigma;
     std::string y; // строка
     std::string x; // образец
 
@@ -19,7 +18,7 @@ private:
     void PartialSuffixMatch();
     void BM();
 public:
-    BoyerMoore(std::string y, std::string x, int sigma);
+    BoyerMoore(std::string y, std::string x);
 
     void Calculate();
     std::vector<int>* GetAnswer()

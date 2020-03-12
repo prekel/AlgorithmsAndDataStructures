@@ -1,25 +1,24 @@
-#include "BoyerMoore.h"
-
 #include <algorithm>
-#include <utility>
+
+#include "BoyerMoore.h"
 
 void BoyerMoore::FullSuffixMatch()
 {
-    int n = x.size();       //find length of pattern
+    int n = x.size();
     int i = n;
     int j = n + 1;
     borderArray->at(i) = j;
 
     while (i > 0)
     {
-        //search right when (i-1)th and (j-1)th item are not same
+
         while (j <= n && x[i - 1] != x[j - 1])
         {
             if (shiftArray->at(j) == 0)
             {
                 shiftArray->at(j) = j - i;
-            }     //shift pattern from i to j
-            j = borderArray->at(j);       //update border
+            }
+            j = borderArray->at(j);
         }
         i--;
         j--;
@@ -29,7 +28,7 @@ void BoyerMoore::FullSuffixMatch()
 
 void BoyerMoore::PartialSuffixMatch()
 {
-    int n = x.size();    //find length of pattern
+    int n = x.size();
     int j;
     j = borderArray->at(0);
 
@@ -37,11 +36,12 @@ void BoyerMoore::PartialSuffixMatch()
     {
         if (shiftArray->at(i) == 0)
         {
-            shiftArray->at(
-                    i) = j;
-        }        //when shift is 0, set shift to border value
+            shiftArray->at(i) = j;
+        }
         if (i == j)
-            j = borderArray->at(j);    //update border value
+        {
+            j = borderArray->at(j);
+        }
     }
 }
 
@@ -55,6 +55,17 @@ void BoyerMoore::BM()
         answer->push_back(-1);
         return;
     }
+    if (m == 1)
+    {
+        for (auto i = 0; i < n; i++)
+        {
+            if (y[i] == x[0])
+            {
+                answer->push_back(i);
+            }
+        }
+        return;
+    }
 
     borderArray->assign(m + 1, 0);
     shiftArray->assign(m + 1, 0);
@@ -62,18 +73,6 @@ void BoyerMoore::BM()
     FullSuffixMatch();
     PartialSuffixMatch();
 
-    //int patLen = pattern.size();
-    //int strLen = mainString.size();
-    //int borderArray[patLen+1];
-    //int shiftArray[patLen + 1];
-
-    for (int i = 0; i <= m; i++)
-    {
-        shiftArray->at(i) = 0;     //set all shift array to 0
-    }
-
-    FullSuffixMatch();
-    PartialSuffixMatch();
     int shift = 0;
 
     while (shift <= (n - m))
@@ -81,14 +80,12 @@ void BoyerMoore::BM()
         int j = m - 1;
         while (j >= 0 && x[j] == y[shift + j])
         {
-            j--;         //reduce j when pattern and main string character is matching
+            j--;
         }
 
         if (j < 0)
         {
             answer->push_back(shift);
-            //(*index)++;
-            //array[(*index)] = shift;
             shift += shiftArray->at(0);
         }
         else
@@ -103,11 +100,10 @@ void BoyerMoore::BM()
     }
 }
 
-BoyerMoore::BoyerMoore(std::string y, std::string x, int sigma)
+BoyerMoore::BoyerMoore(std::string y, std::string x)
 {
     this->y = std::move(y);
     this->x = std::move(x);
-    this->sigma = sigma;
 
     borderArray = new std::vector<int>();
     shiftArray = new std::vector<int>();
