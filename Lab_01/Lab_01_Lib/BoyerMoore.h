@@ -11,35 +11,17 @@ private:
     std::string y; // строка
     std::string x; // образец
 
-    std::vector<int>* bmBc;
-    std::vector<int>* bmGs;
+    std::vector<int>* borderArray;
+    std::vector<int>* shiftArray;
     std::vector<int>* answer;
 
+    void FullSuffixMatch();
+    void PartialSuffixMatch();
+    void BM();
 public:
     BoyerMoore(std::string y, std::string x, int sigma);
 
-    void PreBmBc();
-
-    bool IsPrefix(int p);
-
-    int SuffixLength(int p);
-
-    void PreBmGs();
-
-    void BM();
-
     void Calculate();
-
-    std::vector<int>* GetBmBc()
-    {
-        return bmBc;
-    }
-
-    std::vector<int>* GetBmGs()
-    {
-        return bmGs;
-    }
-
     std::vector<int>* GetAnswer()
     {
         return answer;

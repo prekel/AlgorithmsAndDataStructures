@@ -3,61 +3,45 @@
 #include <algorithm>
 #include <utility>
 
-void BoyerMoore::PreBmBc()
+void BoyerMoore::FullSuffixMatch()
 {
-    auto m = x.length();
-    bmBc->assign(sigma, m);
-    for (auto i = 0; i < m - 2; i++)
-    {
-        bmBc->at(x[i]) = m - 1 - i;
-    }
-}
+    int n = x.size();       //find length of pattern
+    int i = n;
+    int j = n + 1;
+    borderArray->at(i) = j;
 
-bool BoyerMoore::IsPrefix(int p)
-{
-    int m = x.length();
-    for (int i = p, j = 0; i < m; ++i, ++j)
+    while (i > 0)
     {
-        if (x[i] != x[j])
+        //search right when (i-1)th and (j-1)th item are not same
+        while (j <= n && x[i - 1] != x[j - 1])
         {
-            return false;
+            if (shiftArray->at(j) == 0)
+            {
+                shiftArray->at(j) = j - i;
+            }     //shift pattern from i to j
+            j = borderArray->at(j);       //update border
         }
+        i--;
+        j--;
+        borderArray->at(i) = j;
     }
-    return true;
 }
 
-int BoyerMoore::SuffixLength(int p)
+void BoyerMoore::PartialSuffixMatch()
 {
-    int m = x.length();
-    auto len = 0;
-    for (auto i = p, j = m - 1;
-         i >= 0 && x[i] == x[j]; --i, --j)
+    int n = x.size();    //find length of pattern
+    int j;
+    j = borderArray->at(0);
+
+    for (int i = 0; i < n; i++)
     {
-        len += 1;
-    }
-    return len;
-}
-
-void BoyerMoore::PreBmGs()
-{
-    int p;
-
-    int m = x.length();
-
-    bmGs->assign(m, 0);
-    int lastPrefixPosition = m;
-    for (int i = m; i > 0; --i)
-    {
-        if (IsPrefix(i))
+        if (shiftArray->at(i) == 0)
         {
-            lastPrefixPosition = i;
-        }
-        bmGs->at(m - i) = lastPrefixPosition - i + m;
-    }
-    for (int i = 0; i < m - 1; ++i)
-    {
-        int slen = SuffixLength(i);
-        bmGs->at(slen) = m - 1 - i + slen;
+            shiftArray->at(
+                    i) = j;
+        }        //when shift is 0, set shift to border value
+        if (i == j)
+            j = borderArray->at(j);    //update border value
     }
 }
 
@@ -72,22 +56,44 @@ void BoyerMoore::BM()
         return;
     }
 
-    PreBmBc();
-    PreBmGs();
+    borderArray->assign(m + 1, 0);
+    shiftArray->assign(m + 1, 0);
 
-    int j = 0;
-    int i;
-    while (j <= n - m)
+    FullSuffixMatch();
+    PartialSuffixMatch();
+
+    //int patLen = pattern.size();
+    //int strLen = mainString.size();
+    //int borderArray[patLen+1];
+    //int shiftArray[patLen + 1];
+
+    for (int i = 0; i <= m; i++)
     {
-        for (i = m - 1; i >= 0 && x[i] == y[i + j]; --i);
-        if (i < 0)
+        shiftArray->at(i) = 0;     //set all shift array to 0
+    }
+
+    FullSuffixMatch();
+    PartialSuffixMatch();
+    int shift = 0;
+
+    while (shift <= (n - m))
+    {
+        int j = m - 1;
+        while (j >= 0 && x[j] == y[shift + j])
         {
-            answer->push_back(j);
-            j += bmGs->at(0);
+            j--;         //reduce j when pattern and main string character is matching
+        }
+
+        if (j < 0)
+        {
+            answer->push_back(shift);
+            //(*index)++;
+            //array[(*index)] = shift;
+            shift += shiftArray->at(0);
         }
         else
         {
-            j += std::max(bmGs->at(i), bmBc->at(y[i + j]) - m + 1 + i);
+            shift += shiftArray->at(j + 1);
         }
     }
 
@@ -103,8 +109,8 @@ BoyerMoore::BoyerMoore(std::string y, std::string x, int sigma)
     this->x = std::move(x);
     this->sigma = sigma;
 
-    bmBc = new std::vector<int>();
-    bmGs = new std::vector<int>();
+    borderArray = new std::vector<int>();
+    shiftArray = new std::vector<int>();
     answer = new std::vector<int>();
 }
 
@@ -115,7 +121,7 @@ void BoyerMoore::Calculate()
 
 BoyerMoore::~BoyerMoore()
 {
-    delete bmBc;
-    delete bmGs;
+    delete borderArray;
+    delete shiftArray;
     delete answer;
 }
