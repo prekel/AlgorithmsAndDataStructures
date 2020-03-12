@@ -8,8 +8,8 @@ class BoyerMoore
 {
 private:
     int sigma;
-    std::string* y; // строка
-    std::string* x; // образец
+    std::string y; // строка
+    std::string x; // образец
 
     std::vector<int>* bmBc;
     std::vector<int>* bmGs;
