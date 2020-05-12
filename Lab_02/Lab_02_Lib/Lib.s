@@ -7,6 +7,7 @@ MaxInArray:
         pushq   %rbp
         movq    %rsp, %rbp
         # запись в стек адреса первого элемента массива -24(%rbp)
+        # он будет смещатся чтобы получить нужный элемент
         movq    %rdi, -24(%rbp)                 # -24(%rbp) <- array
         # запись в стек кол-ва элементов -28(%rbp)
         movl    %esi, -28(%rbp)                 # -28(%rbp) <- count
@@ -14,34 +15,37 @@ MaxInArray:
         movq    -24(%rbp), %rax                 # %rax <- array
         movl    (%rax), %eax                    # %eax <- (%rax)[0]
         movl    %eax, -4(%rbp)                  # -4(%rbp) <- %eax
-        # итератор -8(%rbp)
+        # номер текущего элемента -8(%rbp)
         movl    $0, -8(%rbp)                    # -8(%rbp) <- 0
 Loop1_Start:
-        # сравнение итератора с кол-вом элементов
+        # сравнение номера текущего элемента с кол-вом элементов
+        # если номер текущего равен или больше, то конец цикла
         movl    -8(%rbp), %eax                  # %eax <- -8(%rbp)
-        cmpl    -28(%rbp), %eax                 # compare -28(%rbp), %eax
+        cmpl    -28(%rbp), %eax                 # compare -28(%rbp) <= %eax
         jge     Loop1_End                       # if greater or equal go to Loop1_End
-        # вычысление адреса
-        movl    -8(%rbp), %eax                  # %eax <- -8(%rbp)
-        cltq                                    # %rax <- %eax
-        leaq    0(,%rax,4), %rdx                # %rdx <- %rax * 4
+        # запись текущего элемента в %eax
         movq    -24(%rbp), %rax                 # %rax <- -24(%rbp)
-        addq    %rdx, %rax                      # %rax += %rdx
         movl    (%rax), %eax                    # %eax <- *(%rax)
-        cmpl    %eax, -4(%rbp)                  # compare %eax, -4(%rbp)
-        jge     Loop1_Continue
-        movl    -8(%rbp), %eax
-        cltq
-        leaq    0(,%rax,4), %rdx
-        movq    -24(%rbp), %rax
-        addq    %rdx, %rax
-        movl    (%rax), %eax
-        movl    %eax, -4(%rbp)
+        # сравнение текущего и максимального
+        # если максимальный больше, цикл идёт с начала
+        cmpl    %eax, -4(%rbp)                  # compare %eax <= -4(%rbp)
+        jge     Loop1_Continue                  # if greater or equal to to Loop1_Continue
+        # иначе максимальному присваивается текущий
+        movl    %eax, -4(%rbp)                  # -4(%rbp) <- %eax
 Loop1_Continue:
-        addl    $1, -8(%rbp)
+        # номер текущего увеличивается на 1
+        addl    $1, -8(%rbp)                    # -8(%rbp) += 1
+        # адрес текущего увеличивается на 4 (байта)
+        movq    -24(%rbp), %rax                 # %rax <- -24(%rbp)
+        addq    $4, %rax                        # %rax += 4
+        movq    %rax, -24(%rbp)                 # -24(%rbp) <- %rax
+        # цикл идёт с начала
         jmp     Loop1_Start
 Loop1_End:
-        movl    -4(%rbp), %eax
+        # возврат значения
+        # return -4(%rbp)
+        movl    -4(%rbp), %eax                  # %eax <- -4(%rbp)
+        # эпилог
         popq    %rbp
         ret
 
