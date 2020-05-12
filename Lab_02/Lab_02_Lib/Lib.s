@@ -75,7 +75,7 @@ Loop2_Start:
     movq    -24(%rbp), %rax                     # %rax <- -24(%rbp)
     movl    (%rax), %eax                        # %eax <- %rax[0]
     # записать текущий элемент в регистр с плавающей точкой
-    cvtsi2sdl %eax, %xmm0                 # %xmm0 <- %eax
+    cvtsi2sdl %eax, %xmm0                       # %xmm0 <- %eax
     # увеличить сумму на текущий элемент
     movsd   -12(%rbp), %xmm1                    # %xmm1 <- -12(%rbp)
     addsd   %xmm1, %xmm0                        # %xmm0 += %xmm1
@@ -90,7 +90,7 @@ Loop2_Start:
     jmp     Loop2_Start
 Loop2_End:
     # записываем кол-во элементов в регистр с плавающей точкой
-    cvtsi2sdl -28(%rbp), %xmm1            # %xmm1 <- -28(%rbp)
+    cvtsi2sdl -28(%rbp), %xmm1                  # %xmm1 <- -28(%rbp)
     # делим сумму на кол-во элементов
     # результат будет в регистре %xmm0 который возвращается
     movsd   -12(%rbp), %xmm0                    # %xmm0 <- -12(%rbp)

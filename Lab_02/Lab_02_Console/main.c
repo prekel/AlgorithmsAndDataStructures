@@ -26,5 +26,7 @@ int main(int argc, char** argv)
     printf("Max: %d\n", max);
     printf("Average: %lf\n", aver);
 
+    free(a);
+
     return 0;
 }
