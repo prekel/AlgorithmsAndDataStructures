@@ -1,12 +1,30 @@
+/// \file
+/// \brief Главная функция программы
+/// \details Главная функция программы.
 #include <stdio.h>
+#include <malloc.h>
 
 #include "Lib.h"
 
 int main(int argc, char** argv)
 {
-    int a[] = {1,2,3,4,5};
+    printf("Enter count: ");
+    int count;
+    scanf("%d", &count);
 
-    int b = MaxInArray(a, 5);
+    int* a = (int*) malloc(count * sizeof(int));
+
+    for (int i = 0; i < count; i++)
+    {
+        printf("Enter element %d: ", i);
+        scanf("%d", &a[i]);
+    }
+
+    int max = MaxInArray(a, count);
+    double aver = AverageInArray(a, count);
+
+    printf("Max: %d\n", max);
+    printf("Average: %lf\n", aver);
 
     return 0;
 }

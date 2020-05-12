@@ -47,53 +47,7 @@ MaxInArray:                             # @MaxInArray
 	.size	MaxInArray, .Lfunc_end0-MaxInArray
 	.cfi_endproc
                                         # -- End function
-	.globl	MinInArray              # -- Begin function MinInArray
-	.p2align	4, 0x90
-	.type	MinInArray,@function
-MinInArray:                             # @MinInArray
-	.cfi_startproc
-# %bb.0:
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register %rbp
-	movq	%rdi, -8(%rbp)
-	movl	%esi, -12(%rbp)
-	movq	-8(%rbp), %rdi
-	movl	(%rdi), %esi
-	movl	%esi, -16(%rbp)
-	movl	$0, -20(%rbp)
-.LBB1_1:                                # =>This Inner Loop Header: Depth=1
-	movl	-20(%rbp), %eax
-	cmpl	-12(%rbp), %eax
-	jge	.LBB1_6
-# %bb.2:                                #   in Loop: Header=BB1_1 Depth=1
-	movl	-16(%rbp), %eax
-	movq	-8(%rbp), %rcx
-	movslq	-20(%rbp), %rdx
-	cmpl	(%rcx,%rdx,4), %eax
-	jle	.LBB1_4
-# %bb.3:                                #   in Loop: Header=BB1_1 Depth=1
-	movq	-8(%rbp), %rax
-	movslq	-20(%rbp), %rcx
-	movl	(%rax,%rcx,4), %edx
-	movl	%edx, -16(%rbp)
-.LBB1_4:                                #   in Loop: Header=BB1_1 Depth=1
-	jmp	.LBB1_5
-.LBB1_5:                                #   in Loop: Header=BB1_1 Depth=1
-	movl	-20(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, -20(%rbp)
-	jmp	.LBB1_1
-.LBB1_6:
-	movl	-16(%rbp), %eax
-	popq	%rbp
-	retq
-.Lfunc_end1:
-	.size	MinInArray, .Lfunc_end1-MinInArray
-	.cfi_endproc
-                                        # -- End function
+
 	.globl	AverageInArray          # -- Begin function AverageInArray
 	.p2align	4, 0x90
 	.type	AverageInArray,@function
