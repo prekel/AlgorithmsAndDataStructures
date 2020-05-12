@@ -22,14 +22,14 @@ Loop1_Start:
     # если номер текущего равен или больше, то конец цикла
     movl    -8(%rbp), %eax                      # %eax <- -8(%rbp)
     cmpl    -28(%rbp), %eax                     # compare -28(%rbp) <= %eax
-    jge     Loop1_End                           # if greater or equal go to Loop1_End
+    jge     Loop1_End                           # if true go to Loop1_End
     # запись текущего элемента в %eax
     movq    -24(%rbp), %rax                     # %rax <- -24(%rbp)
     movl    (%rax), %eax                        # %eax <- %rax[0]
     # сравнение текущего и максимального
     # если максимальный больше, цикл идёт с начала
     cmpl    %eax, -4(%rbp)                      # compare %eax <= -4(%rbp)
-    jge     Loop1_Continue                      # if greater or equal to to Loop1_Continue
+    jge     Loop1_Continue                      # if true to to Loop1_Continue
     # иначе максимальному присваивается текущий
     movl    %eax, -4(%rbp)                      # -4(%rbp) <- %eax
 Loop1_Continue:
