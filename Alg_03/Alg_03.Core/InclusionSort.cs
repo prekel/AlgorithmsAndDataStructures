@@ -6,10 +6,6 @@ namespace Alg_03.Core
     public class InclusionSort<T> : AbstractSort<T>
         where T : IComparable
     {
-        public InclusionSort() : base()
-        {
-        }
-
         public override void Sort(IList<T> array)
         {
             base.Sort(array);

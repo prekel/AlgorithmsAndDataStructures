@@ -13,11 +13,6 @@ namespace Alg_03.Core
 
         public IList<T> Array { get; private set; } = new List<T>();
 
-        protected AbstractSort()
-        {
-            
-        }
-
         protected int Compare(IComparable a, IComparable b)
         {
             CompareCount++;
