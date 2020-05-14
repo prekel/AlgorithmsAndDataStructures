@@ -7,7 +7,7 @@ namespace Alg_03.Core
 {
     public abstract class AbstractSort
     {
-        public int SwapCount { get; protected set; }
+        public int AssignmentCount { get; protected set; }
         public int CompareCount { get; protected set; }
 
         public IList<IComparable> Array { get; }

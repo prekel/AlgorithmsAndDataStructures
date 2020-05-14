@@ -17,12 +17,12 @@ namespace Alg_03.Core
                 var index = i;
                 while (index > 0 && Compare(Array[index - 1], value) > 0)
                 {
-                    SwapCount++;
+                    AssignmentCount++;
                     Array[index] = Array[index - 1];
                     index--;
                 }
 
-                SwapCount++;
+                AssignmentCount++;
                 Array[index] = value;
             }
         }

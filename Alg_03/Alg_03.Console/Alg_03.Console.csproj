@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Alg_03.Core\Alg_03.Core.csproj" />
+    </ItemGroup>
+
 </Project>
