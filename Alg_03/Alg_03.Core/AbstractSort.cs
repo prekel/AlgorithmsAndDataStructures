@@ -11,8 +11,12 @@ namespace Alg_03.Core
         public int AssignmentCount { get; protected set; }
         public int CompareCount { get; protected set; }
 
-        public IList<T> Array { get; }
-        protected AbstractSort(IList<T> array) => Array = array;
+        public IList<T> Array { get; private set; } = new List<T>();
+
+        protected AbstractSort()
+        {
+            
+        }
 
         protected int Compare(IComparable a, IComparable b)
         {
@@ -20,6 +24,11 @@ namespace Alg_03.Core
             return a.CompareTo(b);
         }
 
-        public abstract void Sort();
+        public virtual void Sort(IList<T> array)
+        {
+            Array = array;
+            AssignmentCount = 0;
+            CompareCount = 0;
+        }
     }
 }

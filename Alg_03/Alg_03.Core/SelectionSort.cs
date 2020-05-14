@@ -6,12 +6,13 @@ namespace Alg_03.Core
     public class SelectionSort<T> : AbstractSort<T>
         where T : IComparable
     {
-        public SelectionSort(IList<T> array) : base(array)
+        public SelectionSort() : base()
         {
         }
 
-        public override void Sort()
+        public override void Sort(IList<T> array)
         {
+            base.Sort(array);
             int min;
             for (var i = 0; i < Array.Count - 1; i++)
             {
@@ -19,7 +20,7 @@ namespace Alg_03.Core
 
                 for (var j = i + 1; j < Array.Count; j++)
                 {
-                    if (Compare(Array[j], Array[min]) > 0)
+                    if (Compare(Array[j], Array[min]) < 0)
                     {
                         min = j;
                     }
