@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace Alg_03.Core
 {
-    public class InclusionSort : AbstractSort
+    public class InclusionSort<T> : AbstractSort<T>
+        where T : IComparable
     {
-        public InclusionSort(IList<IComparable> array) : base(array)
+        public InclusionSort(IList<T> array) : base(array)
         {
         }
 

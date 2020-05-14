@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -16,11 +17,15 @@ namespace Alg_03.Tests
         [Test]
         public void Test1()
         {
-            var a = new List<IComparable>(new IComparable[] {1, 3, 4, 34, 5, 6, 2, 33, 2});
+            var a = new List<int>(new[] {1, 3, 4, 34, 5, 6, 2, 33, 2});
 
-            var s = new InclusionSort(a);
-             s.Sort();
+            Assert.IsFalse(a.OrderBy(p => p).SequenceEqual(a));
             
+            var s = new InclusionSort<int>(a);
+            s.Sort();
+
+            Assert.IsTrue(a.OrderBy(p => p).SequenceEqual(a));
+
             Assert.Pass();
         }
     }
