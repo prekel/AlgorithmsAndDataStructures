@@ -6,22 +6,22 @@ namespace Alg_03.Core
     public class InclusionSort<T> : AbstractSort<T>
         where T : IComparable
     {
-        public override void Sort(IList<T> array)
+        public override void Sort(IList<T> list)
         {
-            base.Sort(array);
-            for (var i = 1; i < Array.Count; i++)
+            base.Sort(list);
+            for (var i = 1; i < List.Count; i++)
             {
-                var value = Array[i];
+                var value = List[i];
                 var index = i;
-                while (index > 0 && Compare(Array[index - 1], value) > 0)
+                while (index > 0 && Compare(List[index - 1], value) > 0)
                 {
                     AssignmentCount++;
-                    Array[index] = Array[index - 1];
+                    List[index] = List[index - 1];
                     index--;
                 }
 
                 AssignmentCount++;
-                Array[index] = value;
+                List[index] = value;
             }
         }
     }
