@@ -10,7 +10,7 @@ namespace Alg_03.Tests
 {
     public class Tests
     {
-        [SetUp]
+        //[SetUp]
         public void Setup()
         {
         }
@@ -21,7 +21,7 @@ namespace Alg_03.Tests
             yield return new SelectionSort<int>();
         }
 
-        [TestCaseSource(nameof(IntSorts))]
+        //[TestCaseSource(nameof(IntSorts))]
         public void Test1(AbstractSort<int> s)
         {
             var a = new List<int>(new[] {1, 3, 4, 34, 5, 6, 2, 33, 2});
