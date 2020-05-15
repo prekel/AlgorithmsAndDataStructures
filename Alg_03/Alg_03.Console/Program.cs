@@ -18,19 +18,15 @@ namespace Alg_03.Console
                 System.Console.WriteLine("Введите элементы через пробел: ");
                 try
                 {
-                    var a = Enumerable.Range(0, 10000).ToList();
-                    
-                    //var a = System.Console.ReadLine()
-                    //    .Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries)
-                    //    .Select(Int32.Parse)
-                    //    .ToList();
+                    var a = System.Console.ReadLine()
+                        .Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(Int32.Parse)
+                        .ToList();
                     var b = a.ToList();
-                    
-                    
-                    
+
                     var s1 = new InclusionSort<int>();
                     var s2 = new SelectionSort<int>();
-                    
+
                     System.Console.WriteLine("По возрастанию? [Y(Д)/n(н)]: ");
                     var ans = System.Console.ReadLine();
                     if (ans != "" && ans != "Y" && ans != "Д")
@@ -44,7 +40,7 @@ namespace Alg_03.Console
                     System.Console.WriteLine(String.Join(" ", a));
                     System.Console.WriteLine(
                         $"Кол-во сравнений: {s1.CompareCount}, присваиваний: {s1.AssignmentCount}");
-                    
+
                     System.Console.WriteLine("Cортировка с помощью прямого выбора: ");
                     s2.Sort(b);
                     System.Console.WriteLine(String.Join(" ", b));
@@ -52,7 +48,7 @@ namespace Alg_03.Console
                         $"Кол-во сравнений: {s2.CompareCount}, присваиваний: {s2.AssignmentCount}");
 
                     System.Console.ReadKey();
-                    
+
                     break;
                 }
                 catch (Exception e)

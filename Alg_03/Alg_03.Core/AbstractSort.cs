@@ -13,13 +13,13 @@ namespace Alg_03.Core
         }
 
         public int AssignmentCount { get; protected set; }
-        public int CompareCount { get; protected set; }
+        public int CompareCount { get; private set; }
 
         public IList<T> List { get; private set; } = new List<T>();
 
         public SortOrder Order { get; set; } = SortOrder.Ascending;
 
-        protected int Compare(IComparable a, IComparable b)
+        protected int Compare(T a, T b)
         {
             CompareCount++;
             return (int) Order * a.CompareTo(b);

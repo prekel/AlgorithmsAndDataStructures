@@ -93,8 +93,6 @@ namespace Alg_03.Tests
         [Theory]
         public void ListSortTest(List<T> list)
         {
-            //Assert.That(list.OrderBy(p => p).SequenceEqual(list), Is.False);
-            //Assert.That(list.OrderByDescending(p => p).SequenceEqual(list), Is.False);
             Sort.Sort(list);
             Assert.That(list.OrderByDescending(p => p).SequenceEqual(list), Is.False);
             Assert.That(list.OrderBy(p => p).SequenceEqual(list), Is.True);
@@ -103,8 +101,6 @@ namespace Alg_03.Tests
         [Theory]
         public void ListSortTestDescending(List<T> list)
         {
-            //Assert.That(list.OrderBy(p => p).SequenceEqual(list), Is.False);
-            //Assert.That(list.OrderByDescending(p => p).SequenceEqual(list), Is.False);
             Sort.Order = AbstractSort<T>.SortOrder.Descending;
             Sort.Sort(list);
             Assert.That(list.OrderByDescending(p => p).SequenceEqual(list), Is.True);
