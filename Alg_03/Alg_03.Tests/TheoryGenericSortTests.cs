@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using NUnit.Framework;
-
 using Alg_03.Core;
 
+using NUnit.Framework;
 
 namespace Alg_03.Tests
 {
@@ -92,11 +91,24 @@ namespace Alg_03.Tests
             );
 
         [Theory]
-        public void TestGenericForArbitraryArray(List<T> list)
+        public void ListSortTest(List<T> list)
         {
-            Assert.That(list.OrderBy(p => p).SequenceEqual(list), Is.False);
+            //Assert.That(list.OrderBy(p => p).SequenceEqual(list), Is.False);
+            //Assert.That(list.OrderByDescending(p => p).SequenceEqual(list), Is.False);
             Sort.Sort(list);
+            Assert.That(list.OrderByDescending(p => p).SequenceEqual(list), Is.False);
             Assert.That(list.OrderBy(p => p).SequenceEqual(list), Is.True);
+        }
+
+        [Theory]
+        public void ListSortTestDescending(List<T> list)
+        {
+            //Assert.That(list.OrderBy(p => p).SequenceEqual(list), Is.False);
+            //Assert.That(list.OrderByDescending(p => p).SequenceEqual(list), Is.False);
+            Sort.Order = AbstractSort<T>.SortOrder.Descending;
+            Sort.Sort(list);
+            Assert.That(list.OrderByDescending(p => p).SequenceEqual(list), Is.True);
+            Assert.That(list.OrderBy(p => p).SequenceEqual(list), Is.False);
         }
     }
 }

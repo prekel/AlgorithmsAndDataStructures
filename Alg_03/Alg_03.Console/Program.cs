@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+
 using Alg_03.Core;
 
 namespace Alg_03.Console
@@ -19,9 +20,9 @@ namespace Alg_03.Console
                 {
                     var a = System.Console.ReadLine()
                         .Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(p => Int32.Parse(p))
+                        .Select(Int32.Parse)
                         .ToList();
-                    var s = new InclusionSort<int>();
+                    var s = new InclusionSort<int> {Order = AbstractSort<int>.SortOrder.Descending};
                     s.Sort(a);
                     System.Console.WriteLine(String.Join(" ", a));
                     break;
