@@ -12,16 +12,16 @@ namespace Alg_03.Core
             for (var i = 1; i < List.Count; i++)
             {
                 var value = List[i];
-                var index = i;
-                while (index > 0 && Compare(List[index - 1], value) > 0)
+                var j = i;
+                while (j > 0 && Compare(List[j - 1], value) > 0)
                 {
                     AssignmentCount++;
-                    List[index] = List[index - 1];
-                    index--;
+                    List[j] = List[j - 1];
+                    j--;
                 }
 
                 AssignmentCount++;
-                List[index] = value;
+                List[j] = value;
             }
         }
     }

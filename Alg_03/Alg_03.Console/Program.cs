@@ -15,16 +15,44 @@ namespace Alg_03.Console
 
             while (true)
             {
-                System.Console.WriteLine("Введите элементы через пробел:");
+                System.Console.WriteLine("Введите элементы через пробел: ");
                 try
                 {
-                    var a = System.Console.ReadLine()
-                        .Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(Int32.Parse)
-                        .ToList();
-                    var s = new InclusionSort<int> {Order = AbstractSort<int>.SortOrder.Descending};
-                    s.Sort(a);
+                    var a = Enumerable.Range(0, 10000).ToList();
+                    
+                    //var a = System.Console.ReadLine()
+                    //    .Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries)
+                    //    .Select(Int32.Parse)
+                    //    .ToList();
+                    var b = a.ToList();
+                    
+                    
+                    
+                    var s1 = new InclusionSort<int>();
+                    var s2 = new SelectionSort<int>();
+                    
+                    System.Console.WriteLine("По возрастанию? [Y(Д)/n(н)]: ");
+                    var ans = System.Console.ReadLine();
+                    if (ans != "" && ans != "Y" && ans != "Д")
+                    {
+                        s1.Order = AbstractSort<int>.SortOrder.Descending;
+                        s2.Order = AbstractSort<int>.SortOrder.Descending;
+                    }
+
+                    System.Console.WriteLine("Сортировка с помощью прямого включения: ");
+                    s1.Sort(a);
                     System.Console.WriteLine(String.Join(" ", a));
+                    System.Console.WriteLine(
+                        $"Кол-во сравнений: {s1.CompareCount}, присваиваний: {s1.AssignmentCount}");
+                    
+                    System.Console.WriteLine("Cортировка с помощью прямого выбора: ");
+                    s2.Sort(b);
+                    System.Console.WriteLine(String.Join(" ", b));
+                    System.Console.WriteLine(
+                        $"Кол-во сравнений: {s2.CompareCount}, присваиваний: {s2.AssignmentCount}");
+
+                    System.Console.ReadKey();
+                    
                     break;
                 }
                 catch (Exception e)
