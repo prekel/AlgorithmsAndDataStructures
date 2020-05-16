@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Alg_03", "Alg_03", "{0DFF62
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alg_03.Console", "Alg_03\Alg_03.Console\Alg_03.Console.csproj", "{A9A9BB6B-C3DD-477C-9E99-CC3C313B6E30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alg_03.Tests", "Alg_03\Alg_03.Tests\Alg_03.Tests.csproj", "{3A499564-E01B-4D55-9D52-164267E3ECC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alg_03.Core.Tests", "Alg_03\Alg_03.Core.Tests\Alg_03.Core.Tests.csproj", "{3A499564-E01B-4D55-9D52-164267E3ECC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

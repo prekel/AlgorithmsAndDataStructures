@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Alg_03.Core;
-
 using NUnit.Framework;
 
-namespace Alg_03.Tests
+namespace Alg_03.Core.Tests
 {
     internal class Comparable : IComparable
     {

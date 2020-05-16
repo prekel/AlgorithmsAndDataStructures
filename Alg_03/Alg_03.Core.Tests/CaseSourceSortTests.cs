@@ -1,12 +1,9 @@
-using System;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using NUnit.Framework;
-using Alg_03.Core;
+using System.Linq;
 
-namespace Alg_03.Tests
+using NUnit.Framework;
+
+namespace Alg_03.Core.Tests
 {
     public class CaseSourceSortTests
     {
@@ -20,9 +17,9 @@ namespace Alg_03.Tests
         public void Test1(AbstractSort<int> s)
         {
             var a = new List<int>(new[] {1, 3, 4, 34, 5, 6, 2, 33, 2});
-            
+
             Assert.IsFalse(a.OrderBy(p => p).SequenceEqual(a));
-            
+
             s.Sort(a);
 
             Assert.IsTrue(a.OrderBy(p => p).SequenceEqual(a));

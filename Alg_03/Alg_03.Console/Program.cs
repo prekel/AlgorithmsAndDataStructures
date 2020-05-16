@@ -15,9 +15,9 @@ namespace Alg_03.Console
 
             while (true)
             {
-                System.Console.WriteLine("Введите элементы через пробел: ");
                 try
                 {
+                    System.Console.WriteLine("Введите элементы через пробел: ");
                     var a = System.Console.ReadLine()
                         .Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries)
                         .Select(Int32.Parse)
