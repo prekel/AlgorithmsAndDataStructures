@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -8,6 +9,14 @@ namespace Alg_03.Console
 {
     public class Program
     {
+        private static void SortAndOut(AbstractSort<int> sort, IList<int> ar)
+        {
+            sort.Sort(ar);
+            System.Console.WriteLine(String.Join(" ", ar));
+            System.Console.WriteLine(
+                $"Кол-во сравнений: {sort.CompareCount}, присваиваний: {sort.AssignmentCount}");
+        }
+
         public static void Main(string[] args)
         {
             System.Console.InputEncoding = Encoding.UTF8;
@@ -36,16 +45,10 @@ namespace Alg_03.Console
                     }
 
                     System.Console.WriteLine("Сортировка с помощью прямого включения: ");
-                    s1.Sort(a);
-                    System.Console.WriteLine(String.Join(" ", a));
-                    System.Console.WriteLine(
-                        $"Кол-во сравнений: {s1.CompareCount}, присваиваний: {s1.AssignmentCount}");
+                    SortAndOut(s1, a);
 
                     System.Console.WriteLine("Cортировка с помощью прямого выбора: ");
-                    s2.Sort(b);
-                    System.Console.WriteLine(String.Join(" ", b));
-                    System.Console.WriteLine(
-                        $"Кол-во сравнений: {s2.CompareCount}, присваиваний: {s2.AssignmentCount}");
+                    SortAndOut(s2, b);
 
                     System.Console.ReadKey();
 
