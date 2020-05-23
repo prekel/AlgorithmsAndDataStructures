@@ -5,4 +5,8 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Alg_04.Core\Alg_04.Core.csproj"/>
+    </ItemGroup>
+
 </Project>
