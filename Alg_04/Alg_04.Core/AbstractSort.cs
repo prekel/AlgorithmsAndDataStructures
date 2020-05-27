@@ -13,9 +13,7 @@ namespace Alg_04.Core
         }
 
         public int AssignmentCount { get; protected set; }
-        public int CompareCount { get; private set; }
-
-        public IList<T> List { get; private set; } = new List<T>();
+        public int CompareCount { get; protected set; }
 
         public SortOrder Order { get; set; } = SortOrder.Ascending;
 
@@ -27,7 +25,6 @@ namespace Alg_04.Core
 
         public virtual void Sort(IList<T> list)
         {
-            List = list;
             AssignmentCount = 0;
             CompareCount = 0;
         }
