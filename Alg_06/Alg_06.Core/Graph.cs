@@ -14,7 +14,7 @@ namespace Alg_06.Core
 
         public Vertex<T> AddVertex(T value)
         {
-            V[value] = new Vertex<T>();
+            V[value] = new Vertex<T>(value);
             return V[value];
         }
 
@@ -27,25 +27,25 @@ namespace Alg_06.Core
             return e;
         }
 
-        public void Bfs(Vertex<T> v, Action<Vertex<T>> action)
+        public void Dfs(Vertex<T> v, Action<Vertex<T>> action)
         {
             var visited = new Dictionary<Vertex<T>, bool>();
-            Bfs(v, action, visited);
+            Dfs(v, action, visited);
         }
 
-        private static void Bfs(Vertex<T> v, Action<Vertex<T>> action, IDictionary<Vertex<T>, bool> visited)
+        private static void Dfs(Vertex<T> v, Action<Vertex<T>> action, IDictionary<Vertex<T>, bool> visited)
         {
             visited[v] = true;
             action.Invoke(v);
             foreach (var (vertex1, vertex2) in v)
             {
                 var next = vertex1 == v ? vertex2 : vertex1;
-                if (visited[next])
+                if (visited.ContainsKey(next) && visited[next])
                 {
                     continue;
                 }
 
-                Bfs(next, action, visited);
+                Dfs(next, action, visited);
             }
         }
     }

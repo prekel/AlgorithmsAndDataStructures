@@ -7,5 +7,7 @@ namespace Alg_06.Core
         public Edge(Vertex<T> item1, Vertex<T> item2) : base(item1, item2)
         {
         }
+
+        public override string ToString() => $"{Item1} - {Item2}";
     }
 }
