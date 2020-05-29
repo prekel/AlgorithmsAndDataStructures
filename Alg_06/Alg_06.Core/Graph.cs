@@ -68,13 +68,41 @@ namespace Alg_06.Core
         {
             visited[v] = true;
             action.Invoke(v);
-            foreach (var next in v
-                .Select(i => i.OtherVertex(v) ?? v)
-                .Where(next => !visited.ContainsKey(next) || !visited[next]))
+            foreach (var next in UnvisitedVertices(v, visited))
             {
                 Dfs(next, action, visited);
             }
         }
+
+        public void Bfs(T value, Action<Vertex<T>> action) => Bfs(V[value], action);
+
+        public void Bfs(Vertex<T> v, Action<Vertex<T>> action) =>
+            Bfs(v, action, new SortedDictionary<Vertex<T>, bool>());
+
+        private static void Bfs(Vertex<T> v, Action<Vertex<T>> action, IDictionary<Vertex<T>, bool> visited)
+        {
+            var queue = new Queue<Vertex<T>>();
+            visited[v] = true;
+            queue.Enqueue(v);
+            while (queue.Count > 0)
+            {
+                var cv = queue.Dequeue();
+                action.Invoke(cv);
+                foreach (var next in UnvisitedVertices(cv, visited))
+                {
+                    visited[next] = true;
+                    queue.Enqueue(next);
+                }
+            }
+        }
+
+        private static IEnumerable<Vertex<T>> UnvisitedVertices(Vertex<T> cv, IDictionary<Vertex<T>, bool> visited)
+        {
+            return cv
+                .Select(i => i.OtherVertex(cv) ?? cv)
+                .Where(next => !visited.ContainsKey(next) || !visited[next]);
+        }
+
 
         public override string ToString() => $"V: {String.Join(", ", V.Values)}; E: {String.Join(", ", E)}";
     }

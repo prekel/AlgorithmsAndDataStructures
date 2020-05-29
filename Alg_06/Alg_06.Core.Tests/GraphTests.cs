@@ -93,6 +93,26 @@ namespace Alg_06.Core.Tests
             Assert.That(dfs3.Count, Is.EqualTo(4));
             Assert.That(dfs3.Select(v => v.Value), Is.EquivalentTo(new[] {3, 2, 0, 1}));
 
+            var bfs0 = new List<Vertex<int>>();
+            g.Bfs(0, v => bfs0.Add(v));
+            Assert.That(bfs0.Count, Is.EqualTo(4));
+            Assert.That(bfs0.Select(v => v.Value), Is.EquivalentTo(new[] {0, 1, 2, 3}));
+
+            var bfs1 = new List<Vertex<int>>();
+            g.Bfs(1, v => bfs1.Add(v));
+            Assert.That(bfs1.Count, Is.EqualTo(4));
+            Assert.That(bfs1.Select(v => v.Value), Is.EquivalentTo(new[] {1, 0, 2, 3}));
+
+            var bfs2 = new List<Vertex<int>>();
+            g.Bfs(2, v => bfs2.Add(v));
+            Assert.That(bfs2.Count, Is.EqualTo(4));
+            Assert.That(bfs2.Select(v => v.Value), Is.EquivalentTo(new[] {2, 0, 1, 3}));
+
+            var bfs3 = new List<Vertex<int>>();
+            g.Bfs(3, v => bfs3.Add(v));
+            Assert.That(bfs3.Count, Is.EqualTo(4));
+            Assert.That(bfs3.Select(v => v.Value), Is.EquivalentTo(new[] {3, 2, 0, 1}));
+
             g.RemoveEdge(0, 2);
             Assert.That(g.E.Count, Is.EqualTo(3));
             Assert.That(g.V.Count, Is.EqualTo(4));
@@ -128,6 +148,10 @@ namespace Alg_06.Core.Tests
             var dfs0 = new List<Vertex<int>>();
             g.Dfs(0, v1 => dfs0.Add(v1));
             Assert.That(dfs0.Select(v1 => v1.Value), Is.EquivalentTo(new[] {0, 2, 1, 4, 3, 6, 5, 7}));
+
+            var bfs0 = new List<Vertex<int>>();
+            g.Bfs(0, v1 => bfs0.Add(v1));
+            Assert.That(bfs0.Select(v1 => v1.Value), Is.EquivalentTo(new[] {0, 2, 3, 1, 4, 7, 6, 5}));
         }
     }
 }

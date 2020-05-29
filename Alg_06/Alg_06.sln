@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alg_06.Core", "Alg_06.Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alg_06.Core.Tests", "Alg_06.Core.Tests\Alg_06.Core.Tests.csproj", "{7778C1B8-E501-4415-8226-13D3B1177511}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alg_06.Console", "Alg_06.Console\Alg_06.Console.csproj", "{9580D9A1-88A8-4339-88FE-0A4C14A77209}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{7778C1B8-E501-4415-8226-13D3B1177511}.Release|x64.Build.0 = Release|Any CPU
 		{7778C1B8-E501-4415-8226-13D3B1177511}.Release|x86.ActiveCfg = Release|Any CPU
 		{7778C1B8-E501-4415-8226-13D3B1177511}.Release|x86.Build.0 = Release|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Debug|x64.Build.0 = Debug|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Debug|x86.Build.0 = Debug|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Release|x64.ActiveCfg = Release|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Release|x64.Build.0 = Release|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Release|x86.ActiveCfg = Release|Any CPU
+		{9580D9A1-88A8-4339-88FE-0A4C14A77209}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
