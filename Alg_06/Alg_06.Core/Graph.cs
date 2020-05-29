@@ -96,12 +96,9 @@ namespace Alg_06.Core
             }
         }
 
-        private static IEnumerable<Vertex<T>> UnvisitedVertices(Vertex<T> cv, IDictionary<Vertex<T>, bool> visited)
-        {
-            return cv
-                .Select(i => i.OtherVertex(cv) ?? cv)
-                .Where(next => !visited.ContainsKey(next) || !visited[next]);
-        }
+        private static IEnumerable<Vertex<T>> UnvisitedVertices(Vertex<T> v, IDictionary<Vertex<T>, bool> visited) => v
+            .Select(i => i.OtherVertex(v) ?? v)
+            .Where(next => !(visited.ContainsKey(next) && visited[next]));
 
 
         public override string ToString() => $"V: {String.Join(", ", V.Values)}; E: {String.Join(", ", E)}";

@@ -21,19 +21,32 @@ namespace Alg_06.Console
             System.Console.InputEncoding = Encoding.UTF8;
             System.Console.OutputEncoding = Encoding.UTF8;
 
+            var g = new Graph<int>();
+
             while (true)
             {
                 try
                 {
-                    var g = new Graph<int>();
-
                     System.Console.WriteLine("Введите номера вершин через пробел: ");
                     var a = System.Console.ReadLine()
                         .Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries)
                         .Select(Int32.Parse)
+                        .Distinct()
                         .Select(g.AddVertex)
                         .ToList();
 
+                    break;
+                }
+                catch (Exception e)
+                {
+                    System.Console.Error.WriteLine($"Ошибка: {e.Message}\n");
+                }
+            }
+
+            while (true)
+            {
+                try
+                {
                     System.Console.WriteLine("Вводите через Enter 2 номера вершины через пробел, обозначающих ребро: ");
 
                     while (true)
@@ -54,13 +67,26 @@ namespace Alg_06.Console
                         }
                     }
 
+                    break;
+                }
+                catch (Exception e)
+                {
+                    System.Console.Error.WriteLine($"Ошибка: {e.Message}\n");
+                }
+            }
+
+            while (true)
+            {
+                try
+                {
+                    System.Console.WriteLine($"Вершины графа: {g.V}");
+                    System.Console.WriteLine($"Рёбра графа: {g.E}");
+
                     System.Console.WriteLine("С какой вершины начать обход?");
                     var s = Int32.Parse(System.Console.ReadLine());
 
                     System.Console.WriteLine($"Поиск в глубину: {SearchAndOut(g.Dfs, s, g)}");
                     System.Console.WriteLine($"Поиск в ширину: {SearchAndOut(g.Bfs, s, g)}");
-
-                    System.Console.ReadKey();
 
                     break;
                 }
@@ -69,6 +95,8 @@ namespace Alg_06.Console
                     System.Console.Error.WriteLine($"Ошибка: {e.Message}\n");
                 }
             }
+
+            System.Console.ReadKey();
         }
     }
 }

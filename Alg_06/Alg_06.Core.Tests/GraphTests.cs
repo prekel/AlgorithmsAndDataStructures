@@ -153,5 +153,26 @@ namespace Alg_06.Core.Tests
             g.Bfs(0, v1 => bfs0.Add(v1));
             Assert.That(bfs0.Select(v1 => v1.Value), Is.EquivalentTo(new[] {0, 2, 3, 1, 4, 7, 6, 5}));
         }
+
+        [Test]
+        public void GraphTest3()
+        {
+            var g = new Graph<string>();
+            g.AddVertex("First");
+            g.AddVertex("Second");
+            g.AddVertex("Third");
+            g.AddVertex("Fourth");
+
+            g.AddEdge("First", "Second");
+            g.AddEdge("First", "Fourth");
+
+            var dfs0 = new List<Vertex<string>>();
+            g.Dfs("First", v1 => dfs0.Add(v1));
+            Assert.That(dfs0.Select(v1 => v1.Value), Is.EquivalentTo(new[] {"First", "Fourth", "Second"}));
+
+            var bfs0 = new List<Vertex<string>>();
+            g.Bfs("First", v1 => bfs0.Add(v1));
+            Assert.That(bfs0.Select(v1 => v1.Value), Is.EquivalentTo(new[] {"First", "Fourth", "Second"}));
+        }
     }
 }
