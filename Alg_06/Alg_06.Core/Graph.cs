@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Alg_06.Core
 {
     public class Graph<T> : Tuple<Vertices<T>, Edges<T>>
+        where T : IComparable
     {
         public Graph() : base(new Vertices<T>(), new Edges<T>())
         {
@@ -18,35 +20,62 @@ namespace Alg_06.Core
             return V[value];
         }
 
-        public Edge<T> AddEdge(T value1, T value2)
+        public void RemoveVertex(T value)
         {
-            var e = new Edge<T>(V[value1], V[value2]);
+            E.RemoveWhere(e => e.HasVertex(V[value]));
+            V.Remove(value);
+        }
+
+        public void RemoveVertex(Vertex<T> v)
+        {
+            E.RemoveWhere(e => e.HasVertex(v));
+            V.Remove(v.Value);
+        }
+
+        public void RemoveEdge(Edge<T> e)
+        {
+            V[e.Item1.Value].RemoveWhere(ed => ed.CompareTo(e) == 0);
+            V[e.Item2.Value].RemoveWhere(ed => ed.CompareTo(e) == 0);
+            E.RemoveWhere(ed => ed.CompareTo(e) == 0);
+        }
+
+        public void RemoveEdge(T value1, T value2)
+        {
+            var v1 = V[value1];
+            var v2 = V[value2];
+            v1.RemoveWhere(ed => ed.HasVertex(v1) && ed.HasVertex(v2));
+            v2.RemoveWhere(ed => ed.HasVertex(v1) && ed.HasVertex(v2));
+            E.RemoveWhere(ed => ed.HasVertex(v1) && ed.HasVertex(v2));
+        }
+
+        public Edge<T> AddEdge(T value1, T value2) => AddEdge(V[value1], V[value2]);
+
+        public Edge<T> AddEdge(Vertex<T> v1, Vertex<T> v2)
+        {
+            var e = new Edge<T>(v1, v2);
             E.Add(e);
-            V[value1].Add(e);
-            V[value2].Add(e);
+            v1.Add(e);
+            v2.Add(e);
             return e;
         }
 
-        public void Dfs(Vertex<T> v, Action<Vertex<T>> action)
-        {
-            var visited = new Dictionary<Vertex<T>, bool>();
-            Dfs(v, action, visited);
-        }
+        public void Dfs(T value, Action<Vertex<T>> action) => Dfs(V[value], action);
+
+        public void Dfs(Vertex<T> v, Action<Vertex<T>> action) =>
+            Dfs(v, action, new SortedDictionary<Vertex<T>, bool>());
 
         private static void Dfs(Vertex<T> v, Action<Vertex<T>> action, IDictionary<Vertex<T>, bool> visited)
         {
             visited[v] = true;
             action.Invoke(v);
-            foreach (var (vertex1, vertex2) in v)
+            foreach (var next in v
+                .Select(i => i.OtherVertex(v) ?? v)
+                .Where(next => !visited.ContainsKey(next) || !visited[next]))
             {
-                var next = vertex1 == v ? vertex2 : vertex1;
-                if (visited.ContainsKey(next) && visited[next])
-                {
-                    continue;
-                }
-
                 Dfs(next, action, visited);
             }
         }
+
+        public override string ToString() => $"V: {String.Join(", ", V.Values)}; E: {String.Join(", ", E)}";
     }
 }

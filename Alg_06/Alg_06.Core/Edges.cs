@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 
 namespace Alg_06.Core
 {
-    public class Edges<T> : HashSet<Edge<T>>
+    public class Edges<T> : SortedSet<Edge<T>>
+        where T : IComparable
     {
+        public override string ToString() => String.Join("; ", this);
     }
 }
