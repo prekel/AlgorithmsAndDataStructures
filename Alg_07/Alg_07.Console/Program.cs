@@ -81,6 +81,21 @@ namespace Alg_07.Console
                     System.Console.WriteLine($"Вершины графа: {g.V}");
                     System.Console.WriteLine($"Рёбра графа: {g.E}");
 
+                    System.Console.WriteLine("Введите из какой вершины искать пути: ");
+                    var a = Int32.Parse(System.Console.ReadLine());
+
+                    var d = new Dijkstra<int>(g, g.V[a]);
+                    d.Calc();
+
+                    System.Console.WriteLine();
+                    System.Console.WriteLine("от ->расстояние-> до: список дуг");
+
+                    foreach (var (vertex, path) in d.Paths)
+                    {
+                        System.Console.WriteLine(
+                            $"{a} ->{d.Distances[vertex]}-> {vertex.Value}: {String.Join(", ", path)}");
+                    }
+
                     break;
                 }
                 catch (Exception e)
