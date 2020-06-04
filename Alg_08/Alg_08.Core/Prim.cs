@@ -8,13 +8,15 @@ namespace Alg_08.Core
     public class Prim<T>
         where T : IComparable
     {
-        public Edges<T> TT = new Edges<T>();
+        public readonly Edges<T> Mst = new Edges<T>();
 
         public Prim(Graph<T> g)
         {
             G = g;
             Q = new SortedDictionary<T, Vertex<T>>(V);
         }
+
+        public double MstWeight => Mst.Select(e => e.Weight).Sum();
 
         public Graph<T> G { get; }
         private Vertices<T> V => G.V;
@@ -58,7 +60,7 @@ namespace Alg_08.Core
 
                 v = Q.OrderBy(i => d[i.Value]).First().Value;
                 Q.Remove(v.Value);
-                TT.Add(E.First(e => e.HasVertex(p[v] ?? v) && e.HasVertex(v)));
+                Mst.Add(E.First(e => e.HasVertex(p[v] ?? v) && e.HasVertex(v)));
             }
         }
     }

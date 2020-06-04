@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -9,13 +8,6 @@ namespace Alg_08.Console
 {
     public class Program
     {
-        private static string SearchAndOut(Action<int, Action<Vertex<int>>> search, int start, Graph<int> g)
-        {
-            var res = new List<int>();
-            search(start, v => res.Add(v.Value));
-            return String.Join(" ", res);
-        }
-
         public static void Main(string[] args)
         {
             System.Console.InputEncoding = Encoding.UTF8;
@@ -48,7 +40,7 @@ namespace Alg_08.Console
                 try
                 {
                     System.Console.WriteLine(
-                        "Вводите через Enter 2 номера вершины и вес через пробел, обозначающих дугу: ");
+                        "Введите через Enter 2 номера вершины и вес через пробел, обозначающих ребро: ");
 
                     while (true)
                     {
@@ -81,13 +73,13 @@ namespace Alg_08.Console
                     System.Console.WriteLine($"Вершины графа: {g.V}");
                     System.Console.WriteLine($"Рёбра графа: {g.E}");
 
-                    System.Console.WriteLine("Введите из какой вершины искать пути: ");
-                    var a = Int32.Parse(System.Console.ReadLine());
-
-
                     System.Console.WriteLine();
-                    System.Console.WriteLine("от ->расстояние-> до: список дуг");
 
+                    var p = new Prim<int>(g);
+                    p.Calc();
+
+                    System.Console.WriteLine($"Вес минимального остовного дерева: {p.MstWeight}");
+                    System.Console.WriteLine($"Рёбра минимального остовного дерева: {String.Join(", ", p.Mst)}");
 
                     break;
                 }

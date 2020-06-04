@@ -42,6 +42,8 @@ namespace Alg_08.Core.Tests
 
             var p = new Prim<int>(g);
             p.Calc();
+
+            Assert.That(p.MstWeight, Is.EqualTo(38));
         }
     }
 }
