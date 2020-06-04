@@ -5,10 +5,7 @@ namespace Alg_07.Core
     public class Edge<T> : Tuple<Vertex<T>, Vertex<T>>, IComparable, IEquatable<Edge<T>>
         where T : IComparable
     {
-        public Edge(Vertex<T> item1, Vertex<T> item2, double weight) : base(item1, item2)
-        {
-            Weight = weight;
-        }
+        public Edge(Vertex<T> item1, Vertex<T> item2, double weight) : base(item1, item2) => Weight = weight;
 
         public double Weight { get; }
 
@@ -29,7 +26,7 @@ namespace Alg_07.Core
 
         public Vertex<T>? OtherVertex(Vertex<T> v) => v == Item1 ? Item2 : v == Item2 ? Item1 : null;
 
-        public override string ToString() => $"{Item1} - {Item2}";
+        public override string ToString() => $"({Item1} ->{Weight}-> {Item2})";
 
         public override bool Equals(object? obj)
         {

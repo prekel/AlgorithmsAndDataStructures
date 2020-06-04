@@ -47,7 +47,8 @@ namespace Alg_07.Console
             {
                 try
                 {
-                    System.Console.WriteLine("Вводите через Enter 2 номера вершины через пробел, обозначающих ребро: ");
+                    System.Console.WriteLine(
+                        "Вводите через Enter 2 номера вершины и вес через пробел, обозначающих дугу: ");
 
                     while (true)
                     {
@@ -57,13 +58,11 @@ namespace Alg_07.Console
                             break;
                         }
 
-                        var esp = es.Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries)
-                            .Select(Int32.Parse)
-                            .ToList();
+                        var esp = es.Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                        if (esp.Count == 2)
+                        if (esp.Count == 3)
                         {
-                            g.AddEdge(esp[0], esp[1]);
+                            g.AddEdge(Int32.Parse(esp[0]), Int32.Parse(esp[1]), Double.Parse(esp[2]));
                         }
                     }
 
@@ -81,12 +80,6 @@ namespace Alg_07.Console
                 {
                     System.Console.WriteLine($"Вершины графа: {g.V}");
                     System.Console.WriteLine($"Рёбра графа: {g.E}");
-
-                    System.Console.WriteLine("С какой вершины начать обход?");
-                    var s = Int32.Parse(System.Console.ReadLine());
-
-                    System.Console.WriteLine($"Поиск в глубину: {SearchAndOut(g.Dfs, s, g)}");
-                    System.Console.WriteLine($"Поиск в ширину: {SearchAndOut(g.Bfs, s, g)}");
 
                     break;
                 }

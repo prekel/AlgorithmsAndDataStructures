@@ -100,7 +100,6 @@ namespace Alg_06.Core
             .Select(i => i.OtherVertex(v) ?? v)
             .Where(next => !(visited.ContainsKey(next) && visited[next]));
 
-
         public override string ToString() => $"V: {String.Join(", ", V.Values)}; E: {String.Join(", ", E)}";
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 
 using NUnit.Framework;
@@ -74,8 +73,7 @@ namespace Alg_07.Core.Tests
             Assert.That(g.V[2].First(e => e == e23), Is.EqualTo(e23));
             Assert.That(g.V[3].First(e => e == e23), Is.EqualTo(e23));
 
-            
-            
+
             g.RemoveEdge(0, 2);
             Assert.That(g.E.Count, Is.EqualTo(3));
             Assert.That(g.V.Count, Is.EqualTo(4));
@@ -97,24 +95,16 @@ namespace Alg_07.Core.Tests
         {
             var g = new Graph<int>();
             var v = Enumerable.Range(0, 8).Select(i => g.AddVertex(i)).ToList();
-            g.AddEdge(1, 2);
-            g.AddEdge(0, 2);
-            g.AddEdge(0, 3);
-            g.AddEdge(4, 3);
-            g.AddEdge(2, 4);
-            g.AddEdge(2, 7);
-            g.AddEdge(7, 4);
-            g.AddEdge(6, 7);
-            g.AddEdge(6, 4);
-            g.AddEdge(5, 6);
-
-            var dfs0 = new List<Vertex<int>>();
-            g.Dfs(0, v1 => dfs0.Add(v1));
-            Assert.That(dfs0.Select(v1 => v1.Value), Is.EquivalentTo(new[] {0, 2, 1, 4, 3, 6, 5, 7}));
-
-            var bfs0 = new List<Vertex<int>>();
-            g.Bfs(0, v1 => bfs0.Add(v1));
-            Assert.That(bfs0.Select(v1 => v1.Value), Is.EquivalentTo(new[] {0, 2, 3, 1, 4, 7, 6, 5}));
+            g.AddEdge(1, 2, 1);
+            g.AddEdge(0, 2, 1);
+            g.AddEdge(0, 3, 1);
+            g.AddEdge(4, 3, 1);
+            g.AddEdge(2, 4, 1);
+            g.AddEdge(2, 7, 1);
+            g.AddEdge(7, 4, 1);
+            g.AddEdge(6, 7, 1);
+            g.AddEdge(6, 4, 1);
+            g.AddEdge(5, 6, 1);
         }
 
         [Test]
@@ -126,16 +116,8 @@ namespace Alg_07.Core.Tests
             g.AddVertex("Third");
             g.AddVertex("Fourth");
 
-            g.AddEdge("First", "Second");
-            g.AddEdge("First", "Fourth");
-
-            var dfs0 = new List<Vertex<string>>();
-            g.Dfs("First", v1 => dfs0.Add(v1));
-            Assert.That(dfs0.Select(v1 => v1.Value), Is.EquivalentTo(new[] {"First", "Fourth", "Second"}));
-
-            var bfs0 = new List<Vertex<string>>();
-            g.Bfs("First", v1 => bfs0.Add(v1));
-            Assert.That(bfs0.Select(v1 => v1.Value), Is.EquivalentTo(new[] {"First", "Fourth", "Second"}));
+            g.AddEdge("First", "Second", 1);
+            g.AddEdge("First", "Fourth", 1);
         }
     }
 }
