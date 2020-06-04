@@ -9,24 +9,27 @@ namespace Alg_08.Core
 
         public double Weight { get; }
 
+        public Vertex<T> LessVertex => Item1.CompareTo(Item2) > 0 ? Item2 : Item1;
+        public Vertex<T> GreatVertex => Item1.CompareTo(Item2) > 0 ? Item1 : Item2;
+
         public int CompareTo(object obj)
         {
-            var (item1, item2) = (Edge<T>) obj;
+            var e = (Edge<T>) obj;
 
-            var c1 = Item1.CompareTo(item1);
-            var c2 = Item2.CompareTo(item2);
+            var c1 = LessVertex.CompareTo(e.LessVertex);
+            var c2 = GreatVertex.CompareTo(e.GreatVertex);
 
             return c1 == 0 ? c2 : c1;
         }
 
         public bool Equals(Edge<T>? other) =>
-            other != null && Item1.Equals(other.Item1) && Item2.Equals(other.Item2);
+            other != null && LessVertex.Equals(other.LessVertex) && GreatVertex.Equals(other.GreatVertex);
 
         public bool HasVertex(Vertex<T> v) => Item1 == v || Item2 == v;
 
         public Vertex<T>? OtherVertex(Vertex<T> v) => v == Item1 ? Item2 : v == Item2 ? Item1 : null;
 
-        public override string ToString() => $"({Item1} ->{Weight}-> {Item2})";
+        public override string ToString() => $"({Item1} <-{Weight}-> {Item2})";
 
         public override bool Equals(object? obj)
         {
