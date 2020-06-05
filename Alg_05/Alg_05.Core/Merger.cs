@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 
 namespace Alg_05.Core
@@ -23,44 +22,71 @@ namespace Alg_05.Core
             var a = 0;
             var b = 0;
 
-            while (true)
+            while (InputA.BaseStream.Position != InputA.BaseStream.Length)
             {
-                var readA = 0;
-                var readB = 0;
-                var read = 0;
+                var readedA = 0;
+                var readedB = 0;
+                var mergedA = 0;
+                var mergedB = 0;
+
                 for (var i = 0; i < SectionLength * 2; i++)
                 {
-                    if (readA == SectionLength)
-                    {
-                        b = InputB.ReadInt32();
-                        readB++;
-                    }
-                    else if (readB == SectionLength)
+                    if (readedA == 0 && readedB == 0)
                     {
                         a = InputA.ReadInt32();
-                        readA++;
-                    }
-                    else if (read == 0 || read == 1)
-                    {
-                        a = InputA.ReadInt32();
-                        readA++;
-                    }
-                    else if (read == 0 || read == 2)
-                    {
+                        readedA++;
                         b = InputB.ReadInt32();
-                        readB++;
+                        readedB++;
                     }
+                    else if (mergedA == SectionLength)
+                    {
+                        if (readedB == mergedB)
+                        {
+                            b = InputB.ReadInt32();
+                            readedB++;
+                        }
 
-                    if (a < b)
+                        Output.Write(b);
+                        mergedB++;
+                        continue;
+                    }
+                    else if (mergedB == SectionLength)
                     {
-                        read = 1;
+                        if (readedA == mergedA)
+                        {
+                            a = InputA.ReadInt32();
+                            readedA++;
+                        }
+
+                        Output.Write(a);
+                        mergedA++;
+                        continue;
                     }
                     else
                     {
-                        read = 2;
+                        if (mergedA < mergedB)
+                        {
+                            b = InputB.ReadInt32();
+                            readedB++;
+                        }
+                        else
+                        {
+                            a = InputA.ReadInt32();
+                            readedA++;
+                        }
                     }
 
-                    Output.Write(Math.Min(a, b));
+
+                    if (a < b)
+                    {
+                        Output.Write(a);
+                        mergedA++;
+                    }
+                    else
+                    {
+                        Output.Write(b);
+                        mergedB++;
+                    }
                 }
             }
         }
