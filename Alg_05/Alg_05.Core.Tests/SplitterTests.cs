@@ -44,6 +44,19 @@ namespace Alg_05.Core.Tests
             var m2 = new Merger(new BinaryReader(new MemoryStream(t1)), new BinaryReader(new MemoryStream(t2)),
                 new BinaryWriter(new MemoryStream(r1)), 2);
             m2.Merge();
+
+
+            var q1 = new byte[a.Length * 4 / 2];
+            var q2 = new byte[a.Length * 4 / 2];
+            var w2 = new Splitter(new BinaryReader(new MemoryStream(r1)), new BinaryWriter(new MemoryStream(q1)),
+                new BinaryWriter(new MemoryStream(q2)), 4);
+            w2.Split();
+
+
+            var r4 = new byte[a.Length * 4];
+            var m4 = new Merger(new BinaryReader(new MemoryStream(q1)), new BinaryReader(new MemoryStream(q2)),
+                new BinaryWriter(new MemoryStream(r4)), 4);
+            m4.Merge();
         }
     }
 }

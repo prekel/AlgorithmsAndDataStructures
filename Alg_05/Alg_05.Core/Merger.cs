@@ -64,7 +64,7 @@ namespace Alg_05.Core
                     }
                     else
                     {
-                        if (mergedA < mergedB)
+                        if (mergedA == mergedB && readedA > readedB || readedB == mergedB)
                         {
                             b = InputB.ReadInt32();
                             readedB++;
