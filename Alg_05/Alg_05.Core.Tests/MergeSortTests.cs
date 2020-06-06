@@ -45,7 +45,7 @@ namespace Alg_05.Core.Tests
             var b = new List<int>();
             using (var g = new BinaryReader(new MemoryStream(r8)))
             {
-                b.AddRange(a.Select(i => g.ReadInt32()));
+                b.AddRange(Enumerable.Range(0, 7).Select(i => g.ReadInt32()));
             }
         }
     }

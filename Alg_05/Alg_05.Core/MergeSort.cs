@@ -12,13 +12,11 @@ namespace Alg_05.Core
             Input = input;
             IntermediateInputs = intermediateInputs.Append(input).ToList();
             IntermediateOutputs = intermediateOutputs.Append(output).ToList();
-            Output = output;
         }
 
         private BinaryReader Input { get; }
         private IList<BinaryReader> IntermediateInputs { get; }
         private IList<BinaryWriter> IntermediateOutputs { get; }
-        private BinaryWriter Output { get; }
 
         public void Sort()
         {

@@ -36,8 +36,7 @@ namespace Alg_05.Core
             var readedB = 0;
             var mergedA = 0;
             var mergedB = 0;
-            while (mergedAllA != countA ||
-                   mergedAllB != countB)
+            while (mergedAllA != countA || mergedAllB != countB)
             {
                 if (j == 0)
                 {
