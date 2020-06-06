@@ -4,12 +4,12 @@ using NUnit.Framework;
 
 namespace Alg_05.Core.Tests
 {
-    public class SplitterTests
+    public class SplitterMergerTests
     {
         [Test]
         public void Test1()
         {
-            var a = new[] {54, 32, 12, 30, 16, 24, 92, 19};
+            var a = new[] {54, 32, 12, 30, 16, 24, 92};
 
             var b = new byte[a.Length * 4];
             using (var g = new BinaryWriter(new MemoryStream(b)))
@@ -20,8 +20,8 @@ namespace Alg_05.Core.Tests
                 }
             }
 
-            var o1 = new byte[a.Length * 4 / 2];
-            var o2 = new byte[a.Length * 4 / 2];
+            var o1 = new byte[16];
+            var o2 = new byte[12];
 
             var s = new Splitter(new BinaryReader(new MemoryStream(b)), new BinaryWriter(new MemoryStream(o1)),
                 new BinaryWriter(new MemoryStream(o2)), 1);
@@ -33,8 +33,8 @@ namespace Alg_05.Core.Tests
             m.Merge();
 
 
-            var t1 = new byte[a.Length * 4 / 2];
-            var t2 = new byte[a.Length * 4 / 2];
+            var t1 = new byte[16];
+            var t2 = new byte[12];
             var s2 = new Splitter(new BinaryReader(new MemoryStream(r)), new BinaryWriter(new MemoryStream(t1)),
                 new BinaryWriter(new MemoryStream(t2)), 2);
             s2.Split();
@@ -46,8 +46,8 @@ namespace Alg_05.Core.Tests
             m2.Merge();
 
 
-            var q1 = new byte[a.Length * 4 / 2];
-            var q2 = new byte[a.Length * 4 / 2];
+            var q1 = new byte[16];
+            var q2 = new byte[12];
             var w2 = new Splitter(new BinaryReader(new MemoryStream(r1)), new BinaryWriter(new MemoryStream(q1)),
                 new BinaryWriter(new MemoryStream(q2)), 4);
             w2.Split();

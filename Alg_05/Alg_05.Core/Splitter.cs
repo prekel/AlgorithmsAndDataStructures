@@ -20,6 +20,10 @@ namespace Alg_05.Core
 
         public void Split()
         {
+            Input.BaseStream.Seek(0, SeekOrigin.Begin);
+            OutputA.BaseStream.Seek(0, SeekOrigin.Begin);
+            OutputB.BaseStream.Seek(0, SeekOrigin.Begin);
+
             var i = 0;
             while (Input.BaseStream.Position != Input.BaseStream.Length)
             {

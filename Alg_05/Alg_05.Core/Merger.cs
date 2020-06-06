@@ -19,74 +19,98 @@ namespace Alg_05.Core
 
         public void Merge()
         {
+            InputA.BaseStream.Seek(0, SeekOrigin.Begin);
+            InputB.BaseStream.Seek(0, SeekOrigin.Begin);
+            Output.BaseStream.Seek(0, SeekOrigin.Begin);
+
             var a = 0;
             var b = 0;
 
-            while (InputA.BaseStream.Position != InputA.BaseStream.Length)
-            {
-                var readedA = 0;
-                var readedB = 0;
-                var mergedA = 0;
-                var mergedB = 0;
+            var mergedAllA = 0;
+            var mergedAllB = 0;
+            var countA = InputA.BaseStream.Length / 4;
+            var countB = InputB.BaseStream.Length / 4;
 
-                for (var i = 0; i < SectionLength * 2; i++)
+            var j = 0;
+            var readedA = 0;
+            var readedB = 0;
+            var mergedA = 0;
+            var mergedB = 0;
+            while (mergedAllA != countA ||
+                   mergedAllB != countB)
+            {
+                if (j == 0)
                 {
-                    if (readedA == 0 && readedB == 0)
+                    readedA = 0;
+                    readedB = 0;
+                    mergedA = 0;
+                    mergedB = 0;
+                }
+
+                j++;
+                j %= SectionLength * 2;
+
+                if (mergedA == SectionLength || mergedAllA == countA)
+                {
+                    if (readedB == mergedB)
                     {
-                        a = InputA.ReadInt32();
-                        readedA++;
                         b = InputB.ReadInt32();
                         readedB++;
                     }
-                    else if (mergedA == SectionLength)
-                    {
-                        if (readedB == mergedB)
-                        {
-                            b = InputB.ReadInt32();
-                            readedB++;
-                        }
 
-                        Output.Write(b);
-                        mergedB++;
-                        continue;
+                    Output.Write(b);
+                    mergedB++;
+                    mergedAllB++;
+                    continue;
+                }
+
+                if (mergedB == SectionLength || mergedAllB == countB)
+                {
+                    if (readedA == mergedA)
+                    {
+                        a = InputA.ReadInt32();
+                        readedA++;
                     }
-                    else if (mergedB == SectionLength)
-                    {
-                        if (readedA == mergedA)
-                        {
-                            a = InputA.ReadInt32();
-                            readedA++;
-                        }
 
-                        Output.Write(a);
-                        mergedA++;
-                        continue;
+                    Output.Write(a);
+                    mergedA++;
+                    mergedAllA++;
+                    continue;
+                }
+
+                if (readedA == 0 && readedB == 0)
+                {
+                    a = InputA.ReadInt32();
+                    readedA++;
+                    b = InputB.ReadInt32();
+                    readedB++;
+                }
+                else
+                {
+                    if (mergedA == mergedB && readedA > readedB || readedB == mergedB)
+                    {
+                        b = InputB.ReadInt32();
+                        readedB++;
                     }
                     else
                     {
-                        if (mergedA == mergedB && readedA > readedB || readedB == mergedB)
-                        {
-                            b = InputB.ReadInt32();
-                            readedB++;
-                        }
-                        else
-                        {
-                            a = InputA.ReadInt32();
-                            readedA++;
-                        }
+                        a = InputA.ReadInt32();
+                        readedA++;
                     }
+                }
 
 
-                    if (a < b)
-                    {
-                        Output.Write(a);
-                        mergedA++;
-                    }
-                    else
-                    {
-                        Output.Write(b);
-                        mergedB++;
-                    }
+                if (a < b)
+                {
+                    Output.Write(a);
+                    mergedA++;
+                    mergedAllA++;
+                }
+                else
+                {
+                    Output.Write(b);
+                    mergedB++;
+                    mergedAllB++;
                 }
             }
         }
