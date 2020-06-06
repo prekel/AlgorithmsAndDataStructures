@@ -47,6 +47,8 @@ namespace Alg_05.Core.Tests
             {
                 b.AddRange(Enumerable.Range(0, 7).Select(i => g.ReadInt32()));
             }
+
+            Assert.That(b, Is.EquivalentTo(a.OrderBy(y => y)));
         }
     }
 }

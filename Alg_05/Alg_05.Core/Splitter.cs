@@ -25,7 +25,7 @@ namespace Alg_05.Core
             OutputB.BaseStream.Seek(0, SeekOrigin.Begin);
 
             var i = 0;
-            while (Input.BaseStream.Position != Input.BaseStream.Length)
+            while (Input.BaseStream.Position / 4 != Input.BaseStream.Length / 4)
             {
                 var a = Input.ReadInt32();
                 if (i < SectionLength)
